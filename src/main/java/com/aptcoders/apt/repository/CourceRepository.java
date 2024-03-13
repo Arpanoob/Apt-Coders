@@ -10,6 +10,3 @@ import org.springframework.stereotype.Repository;
 @EnableRedisRepositories
 public interface CourceRepository extends CrudRepository<Cource, Long> {}
 
-//
-//public interface UserRepository extends JpaRepository<User,Integer> {
-//}
