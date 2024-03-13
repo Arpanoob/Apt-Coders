@@ -13,14 +13,14 @@ import org.springframework.data.redis.core.RedisHash;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class Cource {
+public class Course {
 
     private Long id;
 
     private String name;
     private String subject;
     private int chapters;
-    private CourseType type; // Using enum type instead of String
+    private CourseType type;
     private String learnMode;
 
 }

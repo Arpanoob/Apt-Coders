@@ -1,12 +1,12 @@
 package com.aptcoders.apt.services.impl;
 
 import com.aptcoders.apt.constants.UserRoles;
-import com.aptcoders.apt.dto.CourceDTO;
-import com.aptcoders.apt.entity.Cource;
+import com.aptcoders.apt.model.updateCourse;
+import com.aptcoders.apt.entity.Course;
 import com.aptcoders.apt.model.GetCourseResponse;
-import com.aptcoders.apt.repository.CourceRepository;
+import com.aptcoders.apt.repository.CourseRepository;
 
-import com.aptcoders.apt.services.CourceService;
+import com.aptcoders.apt.services.CourseService;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.BeanWrapperImpl;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,47 +19,47 @@ import java.util.HashSet;
 import java.util.List;
 
 @Service
-public class CourceServiceImpl implements CourceService {
+public class CourseServiceImpl implements CourseService {
 
     @Autowired
-    private CourceRepository courceRepository;
+    private CourseRepository courseRepository;
     @Override
-    public void addCources(Cource cource)
+    public void addCources(Course course)
     {
-        courceRepository.save(cource);
+        courseRepository.save(course);
     }
 
     @Override
-    public List<Cource> getCources() {
-        List<Cource> cources = new ArrayList<>();
-        courceRepository.findAll().forEach(cources::add);
-    return cources;}
+    public List<Course> getCources() {
+        List<Course> courses = new ArrayList<>();
+        courseRepository.findAll().forEach(courses::add);
+    return courses;}
 
     @Override
-    public Cource getCources(Long id) {
-        return courceRepository.findById(id).orElseThrow(()->new ResponseStatusException(HttpStatus.NOT_FOUND,"Invalid"));
+    public Course getCources(Long id) {
+        return courseRepository.findById(id).orElseThrow(()->new ResponseStatusException(HttpStatus.NOT_FOUND,"Invalid"));
     }
 
     @Override
-    public void updateCources(Long id, Cource cource) {
-        Cource c =  courceRepository.findById(id).orElseThrow(()->new ResponseStatusException(HttpStatus.NOT_FOUND,"Invalid"));
-        cource.setId(id);
-        System.out.println(cource);
-        courceRepository.save(cource);
+    public void updateCources(Long id, Course course) {
+        Course c =  courseRepository.findById(id).orElseThrow(()->new ResponseStatusException(HttpStatus.NOT_FOUND,"Invalid"));
+        course.setId(id);
+        System.out.println(course);
+        courseRepository.save(course);
 
     }
 
     @Override
     public void deleteCources(Long id) {
-        Cource c =  courceRepository.findById(id).orElseThrow(()->new ResponseStatusException(HttpStatus.NOT_FOUND,"Invalid"));
-        courceRepository.delete(c);
+        Course c =  courseRepository.findById(id).orElseThrow(()->new ResponseStatusException(HttpStatus.NOT_FOUND,"Invalid"));
+        courseRepository.delete(c);
     }
 
     @Override
-    public void updateCources(Long id, CourceDTO courceDTO) {
-        Cource c =  courceRepository.findById(id).orElseThrow(()->new ResponseStatusException(HttpStatus.NOT_FOUND,"Invalid"));
-        BeanUtils.copyProperties(courceDTO,c,getNullPropertyNames(courceDTO));
-        courceRepository.save((c));
+    public void updateCources(Long id, updateCourse updateCourse) {
+        Course c =  courseRepository.findById(id).orElseThrow(()->new ResponseStatusException(HttpStatus.NOT_FOUND,"Invalid"));
+        BeanUtils.copyProperties(updateCourse,c,getNullPropertyNames(updateCourse));
+        courseRepository.save((c));
     }
     private String[] getNullPropertyNames(Object sourceForObjectCopy) {
         final var src = new BeanWrapperImpl(sourceForObjectCopy);
@@ -75,7 +75,7 @@ public class CourceServiceImpl implements CourceService {
     }
     public List<GetCourseResponse> getAllCoursesForStudent() {
         var getCourses = new ArrayList<GetCourseResponse>();
-        var courses = courceRepository.findAll();
+        var courses = courseRepository.findAll();
         courses.forEach(course -> {
             var courseResponse = new GetCourseResponse();
             BeanUtils.copyProperties(course,courseResponse,getNullPropertyNames(course));
@@ -87,7 +87,7 @@ public class CourceServiceImpl implements CourceService {
 
     public List<GetCourseResponse> getAllCoursesForCourseCreator() {
         var getCourses = new ArrayList<GetCourseResponse>();
-        var courses = courceRepository.findAll();
+        var courses = courseRepository.findAll();
         courses.forEach(course -> {
             var courseResponse = new GetCourseResponse();
             BeanUtils.copyProperties(course,courseResponse,getNullPropertyNames(course));
@@ -99,7 +99,7 @@ public class CourceServiceImpl implements CourceService {
 
     public List<GetCourseResponse> getAllCoursesForTeacher() {
         var getCourses = new ArrayList<GetCourseResponse>();
-        var courses = courceRepository.findAll();
+        var courses = courseRepository.findAll();
         courses.forEach(course -> {
             var courseResponse = new GetCourseResponse();
             BeanUtils.copyProperties(course,courseResponse,getNullPropertyNames(course));

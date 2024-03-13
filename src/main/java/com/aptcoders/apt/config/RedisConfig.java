@@ -1,5 +1,5 @@
 package com.aptcoders.apt.config;
-import com.aptcoders.apt.entity.Cource;
+import com.aptcoders.apt.entity.Course;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.data.redis.connection.jedis.JedisConnectionFactory;
@@ -9,8 +9,8 @@ import org.springframework.data.redis.core.RedisTemplate;
 public class RedisConfig {
 
     @Bean
-    public RedisTemplate<String, Cource> redisTemplate() {
-        RedisTemplate<String, Cource> template = new RedisTemplate<>();
+    public RedisTemplate<String, Course> redisTemplate() {
+        RedisTemplate<String, Course> template = new RedisTemplate<>();
         template.setConnectionFactory(jedisConnectionFactory());
         return template;
     }
